@@ -1,0 +1,29 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<h2>Currency Converter</h2>
+<form method="get" action=".">
+    <label for="source_currency">Source Currency:</label>
+    <select id="source_currency" name="source_currency">
+        {% for currency in currencies %}
+            <option value="{{ currency.code }}">{{ currency.code }} - {{ currency.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="target_currency">Target Currency:</label>
+    <select id="target_currency" name="target_currency">
+        {% for currency in currencies %}
+            <option value="{{ currency.code }}">{{ currency.code }} - {{ currency.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="amount">Amount:</label>
+    <input type="number" step="0.01" name="amount" id="amount" required>
+
+    <button type="submit">Convert</button>
+</form>
+
+{% if converted_amount is not None %}
+    <h3>Converted Amount: {{ converted_amount }}</h3>
+{% endif %}
+{% endblock %}
